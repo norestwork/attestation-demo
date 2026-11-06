@@ -2,8 +2,7 @@ FROM golang:1.27-bookworm AS builder
 
 WORKDIR /app
 COPY go.mod go.sum ./
-ENV GOPROXY=https://golang.org,direct
-RUN go mod download
+COPY vendor/ ./vendor/
 COPY . .
 RUN CGO_ENABLED=0 go build -o /app/exe ./cmd
 
